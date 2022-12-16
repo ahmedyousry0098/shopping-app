@@ -14,7 +14,7 @@ const reducer = (state, action) => {
 
 export const AuthonticationProvider = ({children}) => {
 
-    const [state, dispatch] = useReducer(reducer, {isLoggedIn: false});
+    const [state, dispatch] = useReducer(reducer, {isLoggedIn: true});
 
     const logIn = (email, password) => {
         dispatch({type: "log_in", payload: {email, password}})

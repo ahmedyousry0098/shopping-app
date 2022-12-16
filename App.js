@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
 
-  const [splash, setSplash] = useState(true)
+  const [splash, setSplash] = useState(false)
   const {state: {isLoggedIn}} = useContext(AuthonticationContext);
   LogBox.ignoreLogs(['Sending']);
 

@@ -6,16 +6,14 @@ import COLORS from "../constants/colors"
 
 const Cart = () => {
 
-  const {state: {products}} = useContext(ProductContext)
-
-  console.log(products)
+  const {state: {products}} = useContext(ProductContext);
 
   return (
     <View style={styles.container}>
       <ProductItems 
         products={products}
-        showBuyBtn={false}
-        showDeleteBtn={false}
+        showDeleteBtn={true}
+        showCounterBar={true}
       />
     </View>
   )

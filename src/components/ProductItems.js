@@ -5,10 +5,11 @@ import ProductContext from '../context/productContext';
 import COLORS from "../constants/colors";
 import ROUTES from "../constants/routes";
 import { Feather } from '@expo/vector-icons';
+import SetProductsCount from './SetProductsCount';
 
 const {width, height} = Dimensions.get("screen");
 
-const ProductItems = ({products, showBuyBtn, showDeleteBtn=false}) => {
+const ProductItems = ({products, showBuyBtn=false, showDeleteBtn=false}) => {
 
     const navigation = useNavigation();
     const {removeProduct} = useContext(ProductContext);
@@ -33,10 +34,12 @@ const ProductItems = ({products, showBuyBtn, showDeleteBtn=false}) => {
                         <View style={styles.buyProductContainer}>
                             <Text style={styles.productRating}>{`⭐ ${product.rating?.rate}`}</Text>
                             { 
-                                showBuyBtn ? <TouchableOpacity activeOpacity={0.5} onPress={() => (
-                                    navigation.navigate(ROUTES.PRODUCT_DETAILS, {"id": product.id})
-                                )}>
-                                    <View style={styles.buttonContainer}>
+                                showBuyBtn ? <TouchableOpacity 
+                                    activeOpacity={0.5} 
+                                    onPress={() => (
+                                        navigation.navigate(ROUTES.PRODUCT_DETAILS, {"id": product.id})
+                                    )}>
+                                    <View style={styles.buyBtn}>
                                         <Text style={{color: COLORS.WHITE}}>Buy Now</Text>
                                     </View>
                                 </TouchableOpacity> : null 
@@ -44,15 +47,15 @@ const ProductItems = ({products, showBuyBtn, showDeleteBtn=false}) => {
                             {
                                 showDeleteBtn ? <TouchableOpacity
                                     onPress={() => removeProduct(product.id)}
-                                    style={{position: "absolute", top: -5, right: -5, borderRadius: 20, backgroundColor: COLORS.OFF_WHITE.FIRST, padding: 5}}
+                                    style={styles.deleteBtn}
                                 >
                                     <View>
-                                        <Feather name="x" style={{fontSize: 17}} />
+                                        <Feather name="x" style={{fontSize: 16}} />
                                     </View>
                                 </TouchableOpacity> : null
                             }
+                            
                         </View>
-                        
                     </View>
                 })
             }
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     },
     productContainer: {
         width: 0.9 * width,
-        height: 0.2 * height,
+        height: 0.18 * height,
         alignSelf: "center",
         justifyContent: "center",
         flexDirection: "row",
@@ -101,9 +104,19 @@ const styles = StyleSheet.create({
         padding: 3,
         borderRadius: 5
     },
-    buttonContainer: {
+    buyBtn: {
         backgroundColor: COLORS.ORANGE,
         padding: 8,
         borderRadius: 10
     },
-})
+    deleteBtn: {
+        position: "absolute", 
+        top: 0, 
+        right: 0, 
+        borderWidth: 1,
+        borderRadius: 20, 
+        borderColor: COLORS.ORANGE,
+        backgroundColor: COLORS.WHITE, 
+        padding: 1
+    },
+});

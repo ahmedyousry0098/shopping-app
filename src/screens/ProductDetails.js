@@ -1,46 +1,47 @@
 import React, {useState, useContext} from 'react'
-import { StyleSheet, Text, SafeAreaView, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, Dimensions, View, ScrollView, } from 'react-native'
 import { getProductQueries } from '../hooks/useReactQuery'
 import ProductContext from "../context/productContext"
 import ProductItems from '../components/ProductItems'
+import SetProductsCount from '../components/SetProductsCount'
+import ProductDescription from '../components/ProductDescription'
 import AddCard from '../components/AddCard'
 import COLORS from "../constants/colors"
 import ROUTES from "../constants/routes"
 
+const {width} = Dimensions.get("screen")
+
 const ProductDetails = ({route, navigation}) => {
 
-  const [count, setCount] = useState(1)
   const {id} = route.params;
+  const [count, setCount] = useState(1)
   const {products} = getProductQueries();
   const choosenProduct = products.filter(p => p.id === id);
-  const {addProduct} = useContext(ProductContext);
+  const productPrice = choosenProduct[0].price * count;
+  const {addProduct, changeProductCount} = useContext(ProductContext);
 
   return (
     <View style={styles.container}>
       <ProductItems 
         products={choosenProduct}
-        showBuyBtn={false}
       />
-      <View style={styles.txtContainer}>
+      
+      <ProductDescription 
+        product={choosenProduct}
+      />
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.title}>Product Name:</Text>
-          <Text style={styles.txt}>{`${choosenProduct[0].title}`}</Text>
-        </View>
-
-        <View style={styles.sectionContainer}>
-          <Text style={styles.title}>Product Description</Text>
-          <Text style={styles.txt}>{choosenProduct[0].description}</Text>
-        </View>
-      </View>
-
-      <AddCard 
+      <SetProductsCount 
         count={count}
         setCount={setCount}
+        // changeProductCount={changeProductCount(id, count)}
+      />
+
+      <AddCard 
         addProduct={() => {
           addProduct(choosenProduct, count);
           navigation.navigate(ROUTES.CART)
         }}
+        productPrice={productPrice}
       />
     </View>
   )
@@ -53,28 +54,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.ORANGE
   },
-  txtContainer: {
-    height: "80%",
-    backgroundColor: COLORS.WHITE,
-    borderTopStartRadius: 70,
-    borderTopEndRadius: 70,
-    marginHorizontal: 0,
-    paddingTop: 50,
-  },
-  sectionContainer: {
-    marginVertical: 10,
-    marginHorizontal: 30
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "500",
-    marginBottom: 4,
-    color: COLORS.OFF_WHITE.FOURTH
-  },
-  txt: {
-    fontWeight: "400",
-    fontSize: 14,
-    paddingLeft: 5,
-    color: COLORS.OFF_WHITE.FOURTH
-  }
 })

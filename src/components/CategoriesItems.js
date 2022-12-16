@@ -37,7 +37,7 @@ const CategoriesItems = ({forHomeScreen}) => {
               onPress={() => navigation.navigate(ROUTES.PRODUCT, {"category": cat})}
               style={forHomeScreen ? styles.cartContainerForHome : styles.cartContainerForCategories}
             >
-              <View style={{alignItems: "center", justifyContent: "center", borderRadius: 20, flex: 1}}>
+              <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
                 <Text style={styles.txt}>{cat}</Text>
               </View>
             </TouchableOpacity>
@@ -61,13 +61,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginVertical: 10,
-    backgroundColor: COLORS.ORANGE_BG
+    backgroundColor: COLORS.ORANGE_BG,
+    borderRadius: 20, 
   },
   cartContainerForHome: {
     width: "25%",
     height: 100,
     backgroundColor: COLORS.WHITE,
     margin: 10,
+    borderRadius: 20, 
   },
   cartContainerForCategories: {
     width: "60%",

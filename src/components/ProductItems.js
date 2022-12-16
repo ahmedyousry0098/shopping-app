@@ -26,7 +26,7 @@ const ProductItems = ({products, showBuyBtn, showDeleteBtn=false}) => {
                             />
                         </View>
                         <View style={styles.infoContainer}>
-                            <Text style={{fontSize: 14, fontWeight: "bold"}}>{product.title}</Text>
+                            <Text style={{fontSize: 13, fontWeight: "bold"}}>{product.title}</Text>
                             <Text style={{color: "rgb(140, 140, 140)"}}>{product.category}</Text>
                             <Text style={{fontWeight: "bold"}}>{`$${product.price}`}</Text>
                         </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     productContainer: {
         width: 0.9 * width,
-        height: 0.14 * height,
+        height: 0.2 * height,
         alignSelf: "center",
         justifyContent: "center",
         flexDirection: "row",

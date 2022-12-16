@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     shoppingIconContainer: {
       backgroundColor: COLORS.WHITE,
       padding: 20,
-      borderRadius: "50%"
+      borderRadius: 100
     },
     shoppingIcon: {
       fontSize: 70,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
       backgroundColor: COLORS.WHITE,
       width: 0.6 * width,
       padding: 10,
-      borderRadius: "10%"
+      borderRadius: 20
     },
     buttonTxt: {
       textAlign: "center",

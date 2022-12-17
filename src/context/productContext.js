@@ -8,7 +8,7 @@ const reducer = (state, action) => {
         case "add_product":
             // add count prop to product object
             let productObj = action.payload.product[0]
-            let modefiedProductObj = Object.assign(productObj, {product_count: 0});
+            let modefiedProductObj = Object.assign(productObj, {product_count: action.payload.count});
             
             return {...state, products: [...state.products, modefiedProductObj]};
 
@@ -18,9 +18,16 @@ const reducer = (state, action) => {
 
         case "change_product_count":
             // working on it
-            // const product = state.products.find(p => p.id === action.payload.id)
-            // product?.product_count = action.payload.count
-            // return {...state, products: [...state.products, product]}
+            const product = state.products.find(p => p.id === action.payload.id);
+            const modefiedProduct = Object.assign(product, {product_count: action.payload.count})
+            const newProductsArray = state.products.map(p => {
+                if (p.id === action.payload.id) {
+                    return modefiedProduct
+                } else {
+                    return p
+                }
+            }) 
+            return {...state, products: newProductsArray}
     }
 }
 
@@ -28,8 +35,9 @@ export const ProductProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(reducer, {products: []});
 
-    const addProduct = (product) => {
-        dispatch({type: "add_product", payload: {product}})
+    const addProduct = (product, count) => {
+
+        dispatch({type: "add_product", payload: {product, count}})
     }
 
     const removeProduct = (id) => {
@@ -37,7 +45,7 @@ export const ProductProvider = ({children}) => {
     }
 
     const changeProductCount = (id, count) => {
-        console.log(id,count)
+        console.log(count)
         dispatch({type: "change_product_count", payload: {id, count}})
     }
 

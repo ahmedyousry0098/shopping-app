@@ -13,7 +13,7 @@ const Cart = () => {
       <ProductItems 
         products={products}
         showDeleteBtn={true}
-        showCounterBar={true}
+        showCounter={true}
       />
     </View>
   )

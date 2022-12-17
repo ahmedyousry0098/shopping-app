@@ -4,17 +4,15 @@ import COLORS from "../constants/colors"
 
 const {width} = Dimensions.get("screen")
 
-const SetProductsCount = ({count, setCount, /*changeProductCount*/ }) => {
+const SetProductsCount = ({count, setCount}) => {
   return (
     <View style={styles.container}>
         <View style={{marginBottom:12}}>
             <Text style={{color: COLORS.OFF_WHITE.FOURTH, fontWeight: "bold", fontSize: 19}}>Product Quantity</Text>
         </View> 
-
-        <View style={styles.productQuantityContainer}>
+        <View style={{flexDirection: "row"}}>
             <TouchableOpacity onPress={() => {
                     setCount(count + 1);
-                    // changeProductCount
                 }} 
                 style={styles.countChangerContainer}
             >
@@ -27,7 +25,6 @@ const SetProductsCount = ({count, setCount, /*changeProductCount*/ }) => {
             </View>
             <TouchableOpacity onPress={() => {
                     setCount(count - 1);
-                    // changeProductCount
                 }} 
                 style={styles.countChangerContainer}
             >
@@ -52,20 +49,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: "center",
     },
-    productQuantityContainer: {
-        flexDirection: "row",
-    },
     countChangerContainer: {
         backgroundColor: COLORS.ORANGE,
-        padding: 10,
+        padding: 7,
         borderRadius: 20,
-        width: 50,
+        width: 40,
         textAlign: "center"
     },
     countContainer: {
         backgroundColor: COLORS.ORANGE_BG,
-        padding: 10,
-        width: 50,
+        padding: 7,
+        width: 40,
         borderRadius: 20,
         justifyContent: "center"
     },

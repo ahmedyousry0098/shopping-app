@@ -5,14 +5,14 @@ import ProductContext from '../context/productContext';
 import COLORS from "../constants/colors";
 import ROUTES from "../constants/routes";
 import { Feather } from '@expo/vector-icons';
-import SetProductsCount from './SetProductsCount';
+import CartCounter from './CartCounter';
 
 const {width, height} = Dimensions.get("screen");
 
-const ProductItems = ({products, showBuyBtn=false, showDeleteBtn=false}) => {
+const ProductItems = ({products, count=null, showBuyBtn=false, showDeleteBtn=false, showCounter=false}) => {
 
     const navigation = useNavigation();
-    const {removeProduct} = useContext(ProductContext);
+    const {removeProduct, changeProductCount} = useContext(ProductContext);
 
     return (
         <View style={styles.container}>
@@ -31,7 +31,7 @@ const ProductItems = ({products, showBuyBtn=false, showDeleteBtn=false}) => {
                             <Text style={{color: "rgb(140, 140, 140)"}}>{product.category}</Text>
                             <Text style={{fontWeight: "bold"}}>{`$${product.price}`}</Text>
                         </View>
-                        <View style={styles.buyProductContainer}>
+                        <View style={styles.flexableBtns}>
                             <Text style={styles.productRating}>{`⭐ ${product.rating?.rate}`}</Text>
                             { 
                                 showBuyBtn ? <TouchableOpacity 
@@ -54,7 +54,13 @@ const ProductItems = ({products, showBuyBtn=false, showDeleteBtn=false}) => {
                                     </View>
                                 </TouchableOpacity> : null
                             }
-                            
+                            {
+                                showCounter ? <CartCounter 
+                                    count={product.product_count}
+                                    increaseProductCount={() => changeProductCount(product.id, product.product_count + 1)}
+                                    decreaseProductCount={() => changeProductCount(product.id, product.product_count - 1)}
+                                /> : null
+                            }
                         </View>
                     </View>
                 })
@@ -92,8 +98,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%"
     },
-    infoContainer: {flex: 1, justifyContent: "space-around"},
-    buyProductContainer: {justifyContent: "center"},
+    infoContainer: {flex: 1, justifyContent: "space-around",marginRight:15},
+    flexableBtns: {justifyContent: "center"},
     buyButtonContainer: {backgroundColor: COLORS.ORANGE},
     productRating: {
         fontWeight: "bold", 

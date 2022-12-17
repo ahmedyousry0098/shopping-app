@@ -9,8 +9,6 @@ import AddCard from '../components/AddCard'
 import COLORS from "../constants/colors"
 import ROUTES from "../constants/routes"
 
-const {width} = Dimensions.get("screen")
-
 const ProductDetails = ({route, navigation}) => {
 
   const {id} = route.params;
@@ -18,7 +16,7 @@ const ProductDetails = ({route, navigation}) => {
   const {products} = getProductQueries();
   const choosenProduct = products.filter(p => p.id === id);
   const productPrice = choosenProduct[0].price * count;
-  const {addProduct, changeProductCount} = useContext(ProductContext);
+  const {addProduct} = useContext(ProductContext);
 
   return (
     <View style={styles.container}>
@@ -33,7 +31,6 @@ const ProductDetails = ({route, navigation}) => {
       <SetProductsCount 
         count={count}
         setCount={setCount}
-        // changeProductCount={changeProductCount(id, count)}
       />
 
       <AddCard 

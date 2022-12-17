@@ -13,7 +13,6 @@
     "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/stack": "^6.3.9",
-    "@reduxjs/toolkit": "^1.9.1",
     "@rneui/base": "^4.0.0-rc.7",
     "expo": "~47.0.8",
     "expo-status-bar": "~1.4.2",
@@ -24,8 +23,7 @@
     "react": "^18.1.0",
     "react-native": "0.70.5",
     "react-query": "^3.39.2",
-    "react-query-toolkit": "^0.1.1",
-    "react-redux": "^8.0.5"
+    "react-query-toolkit": "^0.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
